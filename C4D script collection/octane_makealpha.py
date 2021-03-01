@@ -4,8 +4,7 @@ from c4d import gui
 ID_OCTANE_IMAGE_TEXTURE = 1029508
 
 def collectShaders(tx, shaders):
-    if shaders is None:
-        shaders = []
+    shaders = []
     while tx:
         shaders.append(tx)
         if tx.GetDown():
@@ -19,7 +18,7 @@ def getName(node, name):
     return name
 
 def first(mats):
-    # for each material in the selection collect
+    # collect each material
     for m in mats:
         try:
             m[c4d.OCT_MATERIAL_OPACITY_LINK].GetName()
@@ -30,7 +29,7 @@ def first(mats):
                 continue
         shaders = None
         shaders = collectShaders(m.GetFirstShader(), shaders)
-        #Get each node in collection
+        # Get each node in collection
         for node in shaders:
             if node.GetName() == "ImageTexture":
                 diffuse = getName(node, "ImageTexture")
